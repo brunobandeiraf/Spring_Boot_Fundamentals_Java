@@ -61,7 +61,7 @@ public class PrimeiraController {
         if(number > 10){
             return ResponseEntity.status(HttpStatus.OK).body(user);
         }
-        return ResponseEntity.badRequest().body("Número menor do que 100")
+        return ResponseEntity.badRequest().body("Número menor do que 100");
     }
 
     // Criando uma classe simples, utilizando o record 
