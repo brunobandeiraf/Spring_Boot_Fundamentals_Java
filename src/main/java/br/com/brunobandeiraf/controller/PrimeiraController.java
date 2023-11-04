@@ -2,6 +2,9 @@ package br.com.brunobandeiraf.controller;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestController
 @RequestMapping("/primeiraController")
@@ -48,6 +52,16 @@ public class PrimeiraController {
     @PostMapping("/metodoComListHeaders")
     public String metodoComListHeaders(@RequestHeader("name") Map<String, String> headers){
         return "metodoComListHeaders " + headers.entrySet();
+    }
+
+    @GetMapping("/metodoResponseEntity")
+    public ResponseEntity<Object> metodoResponseEntity(@PathVariable Long number){
+        var user = new Usuario("brunobandeira");
+
+        if(number > 10){
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        }
+        return ResponseEntity.badRequest().body("Número menor do que 100")
     }
 
     // Criando uma classe simples, utilizando o record 
