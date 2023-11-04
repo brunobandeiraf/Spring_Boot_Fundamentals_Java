@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,16 @@ public class PrimeiraController {
     @PostMapping("/metodoComBodyParams")
     public String metodoComBodyParams(@RequestBody Usuario usuario){
         return "metodoComBodyParams " + usuario.username();
+    }
+
+    // Headers
+    @PostMapping("/metodoComHeaders")
+    public String metodoComHeaders(@RequestHeader("name") String name){
+        return "metodoComHeaders " + name;
+    }
+    @PostMapping("/metodoComListHeaders")
+    public String metodoComListHeaders(@RequestHeader("name") Map<String, String> headers){
+        return "metodoComListHeaders " + headers.entrySet();
     }
 
     // Criando uma classe simples, utilizando o record 
